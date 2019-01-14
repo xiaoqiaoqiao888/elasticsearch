@@ -1,0 +1,5 @@
+-Dapp.id=20190114 
+-Denv=DEV 
+-Ddev_meta=http://127.0.0.1:8080
+-Dapollo.cluster=SEARCHENGINES-MATLAB 
+-Dapollo.autoUpdateInjectedSpringProperties=false 

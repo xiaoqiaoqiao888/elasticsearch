@@ -1,0 +1,58 @@
+<configuration scan="true" scanPeriod="120 seconds"
+	debug="false">
+	<property name="FILE_LOG_PATTERN"
+		value="%d{yyyyMMddHHmmss} %msg%n" />
+	<property name="FILE_LOG_PATTERN_TIME"
+		value="%d{yyyyMMddHHmmssSSS}%msg%n" />
+	<property name="FILE_LOG_PATTERN_ONLY_CONTENT" value="%msg%n" />
+	<property name="SERVER_LOG_PATTERN"
+		value="%d %p (%c:%L\)- %m%n" />
+	<property name="LOG_PATH" value="${logsdir}" />
+
+	<!-- %m输出的信息,%p日志级别,%t线程名,%d日期,%c类的全名,,,, -->
+	<appender name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d %p (%c:%L\)- %m%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+	<appender name="server"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${LOG_PATH}/server.log</File>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/server.log.%d{yyyy-MM-dd-HH}
+			</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<Pattern>%d %p (%c:%L\)- %m%n</Pattern>
+			<charset>UTF-8</charset> <!-- 此处设置字符集 -->
+		</encoder>
+	</appender>
+	<!--插入数据失败时，记录日志 -->
+	<appender name="falseDate"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${LOG_PATH}/error.log</File>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/error.log.%d{yyyy-MM-dd-HH}
+			</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<Pattern>%d %p (%c:%L\)- %m%n</Pattern>
+			<charset>UTF-8</charset> <!-- 此处设置字符集 -->
+		</encoder>
+	</appender>
+	<logger name="com.rails.searchengines.matlab" additivity="false">
+		    <!--指定类的日志级别，会影响指定类日志发出信息的成功与否 -->
+		<level value="error" />
+		<appender-ref ref="falseDate" />
+	</logger>
+
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="server" />
+	</root>
+</configuration>
