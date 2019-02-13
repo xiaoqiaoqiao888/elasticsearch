@@ -1,5 +1,11 @@
--Dapp.id=20190114 
+------------------Apollo 配置中心说明 -----------------------
+#指定应用
+-Dapp.id=20190114
+ #指定环境,如果是本地开发模式指定为Local
 -Denv=DEV 
+#指定pro环境meta server地址
 -Ddev_meta=http://127.0.0.1:8080
+#指定集群
 -Dapollo.cluster=SEARCHENGINES-MATLAB 
+#关闭placeholder运行时自动更新功能
 -Dapollo.autoUpdateInjectedSpringProperties=false 
